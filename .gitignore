@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Originaux photo : ils restent sur le Mac, le site ne s'en sert pas.
+# Tout le dossier images est ignoré, sauf ce que le site charge vraiment.
+images/*
+!images/pieces/
+!images/projets/
+!images/croisement-terre.jpg
+!images/croisement-metal.jpg
+!images/sabine-web.jpg
+!images/malak-web.jpg
+!images/lucas.jpg

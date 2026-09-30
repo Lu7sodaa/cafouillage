@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Cafouillage</title>
+<meta name="description" content="Décrire un projet d'agencement ou demander des échantillons.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=Spline+Sans+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<header class="tete bande">
+  <div class="bloc-enseigne">
+    <a class="enseigne" href="index.html" data-nom>Cafouillage</a>
+    <p class="base-line" data-baseline>Situation incertaine dans la surface de réparation</p>
+  </div>
+  <nav class="menu" aria-label="Navigation principale">
+    <a href="realisations.html">Réalisations</a>
+    <a href="pieces.html">Pièces</a>
+    <a href="index.html#manifeste">Manifeste</a>
+    <a href="sur-mesure.html">Sur mesure</a>
+    <a href="ateliers.html">Ateliers</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="section--serree bande" style="padding-top:3.5rem;">
+    <h1>Décrire un projet</h1>
+    <p class="chapo mesure" style="margin-top:1.25rem;">Quelques lignes suffisent pour savoir si nous sommes le bon atelier. Réponse sous deux jours ouvrés, avec un ordre de grandeur chiffré.</p>
+  </section>
+
+  <section class="bande" style="padding-bottom:4rem;">
+    <form class="formulaire" data-brief novalidate>
+      <div class="champ">
+        <label for="nom">Votre nom</label>
+        <input id="nom" name="nom" type="text" autocomplete="name">
+      </div>
+      <div class="champ">
+        <label for="structure">Agence ou enseigne</label>
+        <input id="structure" name="structure" type="text" autocomplete="organization">
+      </div>
+      <div class="champ">
+        <label for="ville">Ville du projet</label>
+        <input id="ville" name="ville" type="text">
+      </div>
+      <div class="champ">
+        <label for="nature">Nature de l'ouvrage</label>
+        <select id="nature" name="nature">
+          <option>Mural ou crédence</option>
+          <option>Îlot ou plan</option>
+          <option>Banque d'accueil ou comptoir</option>
+          <option>Mobilier ou structure acier</option>
+          <option>Éclairage ou mise en lumière</option>
+          <option>Pièce d'atelier</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div class="champ">
+        <label for="surface">Surface ou dimensions approximatives</label>
+        <input id="surface" name="surface" type="text" placeholder="4 m² de crédence, comptoir de 3,20 m…">
+      </div>
+      <div class="champ">
+        <label for="echeance">Échéance souhaitée</label>
+        <input id="echeance" name="echeance" type="text" placeholder="Livraison en mars">
+      </div>
+      <div class="champ">
+        <label for="budget">Budget indicatif</label>
+        <select id="budget" name="budget">
+          <option>Moins de 3 000 €</option>
+          <option>3 000 à 8 000 €</option>
+          <option>8 000 à 20 000 €</option>
+          <option>Plus de 20 000 €</option>
+          <option>À définir</option>
+        </select>
+      </div>
+      <div class="champ">
+        <label for="projet">Le projet en quelques lignes</label>
+        <textarea id="projet" name="projet"></textarea>
+      </div>
+      <p class="erreur" data-erreur role="alert"></p>
+      <button class="bouton" type="submit">Envoyer la demande</button>
+      <p class="donnee tres-discret">Le bouton ouvre votre messagerie avec la demande déjà rédigée.</p>
+    </form>
+  </section>
+
+
+</main>
+
+<footer class="pied bande" data-pied-ateliers>
+  <div><h3>Sabine Orlandini</h3><p>29 montée Bonafous, Lyon 4</p></div>
+  <div><h3>Atelier Malak</h3><p>Vaulx-en-Velin</p></div>
+  <div><h3>hnhu</h3><p>Monts du Lyonnais</p></div>
+  <div><h3>Écrire</h3><p><a class="lien-souligne" data-courriel href="mailto:contact@cafouillage.fr">contact@cafouillage.fr</a></p></div>
+</footer>
+
+<script src="data/contenu.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+/* Cafouillage — feuille de style unique */
+
+:root {
+  --platre: #E6E4DE;
+  --platre-creux: #DBD8D0;
+  --encre: #1B1D1A;
+  --encre-douce: #5D605A;
+  --encre-legere: #8B8D85;
+  --outremer: #1B2F7A;
+  --trait: rgba(27, 29, 26, 0.22);
+  --trait-fort: #1B1D1A;
+  --nuit: #16181A;
+  --nuit-claire: #9BA2A8;
+  --marge: clamp(1.25rem, 5vw, 4.5rem);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--platre);
+  color: var(--encre);
+  font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  font-weight: 400;
+  font-synthesis: none;
+}
+
+a { color: inherit; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--outremer);
+  outline-offset: 3px;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ---------- ossature ---------- */
+
+.bande { padding-left: var(--marge); padding-right: var(--marge); }
+
+.section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+.section--serree { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+.section--filet { border-top: 1px solid var(--trait-fort); }
+
+.mesure { max-width: 62ch; }
+.mesure-large { max-width: 78ch; }
+
+/* ---------- typographie ---------- */
+
+h1, h2, h3 { font-weight: 500; margin: 0; letter-spacing: -0.012em; }
+
+h1 { font-size: clamp(2rem, 4.6vw, 3.4rem); line-height: 1.08; }
+h2 { font-size: clamp(1.4rem, 2.4vw, 1.95rem); line-height: 1.18; }
+h3 { font-size: 1.13rem; line-height: 1.3; }
+
+p { margin: 0 0 1.1rem; }
+p:last-child { margin-bottom: 0; }
+
+.chapo { font-size: clamp(1.05rem, 1.6vw, 1.28rem); line-height: 1.5; color: var(--encre-douce); }
+.discret { color: var(--encre-douce); }
+.tres-discret { color: var(--encre-legere); }
+
+.donnee {
+  font-family: "Spline Sans Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.79rem;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.lien-souligne {
+  text-decoration: none;
+  border-bottom: 1px solid var(--trait-fort);
+  padding-bottom: 1px;
+}
+.lien-souligne:hover { border-bottom-color: var(--outremer); color: var(--outremer); }
+
+/* ---------- en-tête ---------- */
+
+.tete {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+  flex-wrap: wrap;
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--trait-fort);
+}
+
+.bloc-enseigne { display: grid; gap: 0.3rem; }
+
+.enseigne {
+  font-size: 1.02rem;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.base-line { color: var(--encre-douce); font-size: 0.86rem; line-height: 1.35; max-width: 48ch; }
+
+.menu { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+.menu a { text-decoration: none; color: var(--encre-douce); font-size: 0.93rem; }
+.menu a:hover { color: var(--encre); }
+.menu a[aria-current="page"] { color: var(--encre); border-bottom: 1px solid var(--encre); }
+
+/* ---------- registre ---------- */
+
+.registre { width: 100%; border-collapse: collapse; }
+
+.registre caption {
+  text-align: left;
+  color: var(--encre-douce);
+  padding-bottom: 0.9rem;
+  font-size: 0.95rem;
+}
+
+.registre th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--encre-legere);
+  border-bottom: 1px solid var(--trait-fort);
+  padding: 0 0.9rem 0.5rem 0;
+  white-space: nowrap;
+}
+
+.registre td {
+  border-bottom: 1px solid var(--trait);
+  padding: 0.85rem 0.9rem 0.85rem 0;
+  vertical-align: baseline;
+}
+
+.registre tbody tr:hover { background: var(--platre-creux); }
+
+.registre a { text-decoration: none; }
+.registre a:hover { color: var(--outremer); }
+
+.col-ref { width: 8%; }
+.col-date { width: 13%; }
+.col-lieu { width: 26%; }
+.col-atelier { width: 20%; text-align: right; }
+.registre .col-atelier { padding-right: 0; }
+
+.marqueur {
+  display: inline-block;
+  border: 1px solid var(--outremer);
+  color: var(--outremer);
+  padding: 1px 6px;
+  margin-left: 0.5rem;
+  border-radius: 2px;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  vertical-align: 1px;
+}
+
+/* ---------- filtres ---------- */
+
+.filtres { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+
+.filtres button {
+  font: inherit;
+  font-size: 0.88rem;
+  background: none;
+  border: 1px solid var(--trait);
+  color: var(--encre-douce);
+  padding: 0.3rem 0.85rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.filtres button:hover { border-color: var(--encre); color: var(--encre); }
+.filtres button[aria-pressed="true"] { border-color: var(--encre); background: var(--encre); color: var(--platre); }
+
+/* ---------- images et cadres en attente ---------- */
+
+.cadre { background: var(--platre-creux); position: relative; overflow: hidden; }
+.cadre--large { aspect-ratio: 16 / 9; }
+.cadre--portrait { aspect-ratio: 3 / 4; }
+.cadre--carre { aspect-ratio: 1 / 1; }
+
+.cadre img { width: 100%; height: 100%; object-fit: cover; }
+
+/* portrait d'atelier : même format pour les trois, quelles que soient
+   les proportions de la photo d'origine */
+.cadre--atelier { aspect-ratio: 4 / 5; }
+
+/* photo d'ouvrage : proportions d'origine, hauteur plafonnée pour qu'une
+   image verticale ne remplisse pas l'écran à elle seule */
+.cadre--photo { aspect-ratio: auto; background: none; }
+.cadre--photo img {
+  width: auto;
+  height: auto;
+  max-height: 38rem;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.cadre-vide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.9rem;
+  color: var(--encre-legere);
+  border: 1px solid var(--trait);
+}
+
+/* ---------- croisement pleine page ---------- */
+
+.croisement {
+  position: relative;
+  height: min(72vh, 42rem);
+  min-height: 22rem;
+  background: var(--nuit);
+  overflow: hidden;
+  border-top: 1px solid var(--trait-fort);
+  border-bottom: 1px solid var(--trait-fort);
+}
+
+.croisement-pan { position: absolute; inset: 0; }
+.croisement-pan img { width: 100%; height: 100%; object-fit: cover; }
+
+.croisement-pan--gauche { background: #2C3035; }
+
+.croisement-pan--droite {
+  background: #6E645A;
+  clip-path: polygon(58% 0, 100% 0, 100% 100%, 28% 100%);
+}
+
+/* voile sombre en bas de bande : garde les légendes lisibles
+   quelle que soit la photo posée derrière */
+.croisement-voile {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 7rem;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(10, 11, 10, 0.6), rgba(10, 11, 10, 0));
+}
+
+/* la couture est doublée : un filet clair et son ombre, pour rester
+   visible aussi bien sur une matière pâle que sur une matière sombre */
+.croisement-couture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--platre);
+  opacity: 0.92;
+  clip-path: polygon(58% 0, 58.14% 0, 28.14% 100%, 28% 100%);
+}
+
+.croisement-couture--ombre {
+  background: var(--encre);
+  opacity: 0.45;
+  clip-path: polygon(58.14% 0, 58.42% 0, 28.42% 100%, 28.14% 100%);
+}
+
+.croisement-legende {
+  position: absolute;
+  bottom: 1.1rem;
+  color: var(--platre);
+  opacity: 0.72;
+}
+.croisement-legende--gauche { left: var(--marge); }
+.croisement-legende--droite { right: var(--marge); }
+
+/* ---------- manifeste ---------- */
+
+.manifeste { max-width: 54ch; }
+.manifeste p { font-size: clamp(1.06rem, 1.7vw, 1.32rem); line-height: 1.55; margin-bottom: 1.6rem; }
+.manifeste p:first-child { font-size: clamp(1.2rem, 2.1vw, 1.6rem); line-height: 1.38; }
+.manifeste p:last-child { margin-bottom: 0; color: var(--encre-douce); }
+
+/* ---------- grilles ---------- */
+
+.grille { display: grid; gap: 1.4rem; }
+.grille--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
+.grille--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+
+.vignette a { text-decoration: none; display: block; }
+.vignette h3 { margin-top: 0.7rem; font-size: 1rem; font-weight: 400; }
+.vignette .donnee { display: block; margin-top: 0.25rem; color: var(--encre-legere); }
+.vignette a:hover h3 { color: var(--outremer); }
+
+/* ---------- pièces ---------- */
+
+.grille-pieces { display: grid; gap: 2.5rem 1.6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+
+/* seconde vue superposée, révélée au survol ou au focus clavier */
+.piece-photo img { transition: opacity 0.35s ease; }
+.piece-autre-vue { position: absolute; inset: 0; opacity: 0; }
+.piece--deux-vues:hover .piece-autre-vue,
+.piece--deux-vues:focus-visible .piece-autre-vue { opacity: 1; }
+.piece--deux-vues:focus-visible { outline: 2px solid var(--outremer); outline-offset: 4px; }
+
+/* ---------- ateliers ---------- */
+
+/* la colonne de gauche est à la largeur exacte de la photo : pas de
+   vide à sa droite, et les trois portraits s'alignent */
+.atelier { display: grid; gap: 2.5rem 3rem; grid-template-columns: 17rem minmax(0, 44rem); align-items: start; }
+.atelier-matiere { color: var(--encre-legere); margin: 0.55rem 0 1.25rem; }
+
+/* ---------- étapes ---------- */
+
+.etapes { list-style: none; margin: 0; padding: 0; counter-reset: etape; }
+
+.etapes li {
+  counter-increment: etape;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--trait);
+}
+.etapes li:last-child { border-bottom: 1px solid var(--trait); }
+
+.etapes li::before {
+  content: counter(etape, decimal-leading-zero);
+  font-family: "Spline Sans Mono", monospace;
+  font-size: 0.79rem;
+  color: var(--encre-legere);
+  padding-top: 0.3rem;
+}
+
+/* ---------- fiche d'ouvrage ---------- */
+
+.fiche { width: 100%; border-collapse: collapse; }
+.fiche th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--encre-legere);
+  width: 11rem;
+  padding: 0.6rem 1rem 0.6rem 0;
+  border-bottom: 1px solid var(--trait);
+  vertical-align: baseline;
+}
+.fiche td { padding: 0.6rem 0; border-bottom: 1px solid var(--trait); vertical-align: baseline; }
+
+/* ---------- formulaire ---------- */
+
+.formulaire { display: grid; gap: 1.1rem; max-width: 34rem; }
+.champ { display: grid; gap: 0.35rem; }
+.champ label { font-size: 0.93rem; color: var(--encre-douce); }
+
+.champ input,
+.champ select,
+.champ textarea {
+  font: inherit;
+  font-size: 0.97rem;
+  background: transparent;
+  border: 1px solid var(--trait);
+  border-radius: 2px;
+  padding: 0.6rem 0.7rem;
+  color: var(--encre);
+  width: 100%;
+}
+.champ textarea { min-height: 7rem; resize: vertical; }
+
+.bouton {
+  font: inherit;
+  font-size: 0.97rem;
+  background: var(--encre);
+  color: var(--platre);
+  border: 1px solid var(--encre);
+  border-radius: 2px;
+  padding: 0.65rem 1.4rem;
+  cursor: pointer;
+  justify-self: start;
+}
+.bouton:hover { background: var(--outremer); border-color: var(--outremer); }
+
+.erreur { color: #8C2015; font-size: 0.88rem; }
+
+/* ---------- pied ---------- */
+
+.pied {
+  border-top: 1px solid var(--trait-fort);
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  color: var(--encre-douce);
+  font-size: 0.93rem;
+}
+.pied h3 { font-size: 0.86rem; font-weight: 400; color: var(--encre-legere); margin-bottom: 0.55rem; }
+.pied a { text-decoration: none; }
+.pied a:hover { color: var(--encre); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 800px) {
+  .atelier { grid-template-columns: 1fr; }
+  .atelier .cadre { max-width: 17rem; }
+  .col-lieu, .col-atelier { display: none; }
+  .etapes li { grid-template-columns: 2.5rem 1fr; }
+  .fiche th { width: 8rem; }
+  .croisement { height: 62vh; }
+  .croisement-pan--droite { clip-path: polygon(0 62%, 100% 34%, 100% 100%, 0 100%); }
+  .croisement-couture { clip-path: polygon(0 62%, 100% 34%, 100% 34.4%, 0 62.4%); }
+  .croisement-couture--ombre { clip-path: polygon(0 62.4%, 100% 34.4%, 100% 35.2%, 0 63.2%); }
+  .croisement-legende--gauche { bottom: auto; top: 1.1rem; }
+  /* en mobile la première légende remonte en haut : le voile couvre
+     les deux extrémités de la bande */
+  .croisement-voile {
+    inset: 0;
+    height: auto;
+    background:
+      linear-gradient(to bottom, rgba(10, 11, 10, 0.55), rgba(10, 11, 10, 0) 6rem),
+      linear-gradient(to top, rgba(10, 11, 10, 0.6), rgba(10, 11, 10, 0) 7rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

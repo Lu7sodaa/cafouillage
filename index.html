@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cafouillage — trois ateliers, Lyon</title>
+<meta name="description" content="Trois ateliers lyonnais — la terre, le métal, la lumière — pour les agencements sur mesure des architectes d'intérieur, décorateurs et créateurs de lieux.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=Spline+Sans+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<header class="tete bande">
+  <div class="bloc-enseigne">
+    <a class="enseigne" href="index.html" data-nom>Cafouillage</a>
+    <p class="base-line" data-baseline>Situation incertaine dans la surface de réparation</p>
+  </div>
+  <nav class="menu" aria-label="Navigation principale">
+    <a href="realisations.html">Réalisations</a>
+    <a href="pieces.html">Pièces</a>
+    <a href="index.html#manifeste">Manifeste</a>
+    <a href="sur-mesure.html">Sur mesure</a>
+    <a href="ateliers.html">Ateliers</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="section--serree bande" style="padding-top:3.25rem;">
+    <table class="registre">
+      <caption>Registre des ouvrages. Chaque ligne ouvre une fiche complète : matières, dimensions, délai, commanditaire.</caption>
+      <thead>
+        <tr>
+          <th class="col-ref donnee">Réf.</th>
+          <th class="col-date donnee">Date</th>
+          <th class="donnee">Ouvrage</th>
+          <th class="col-lieu donnee">Lieu</th>
+          <th class="col-atelier donnee">Atelier</th>
+        </tr>
+      </thead>
+      <tbody data-registre="8"></tbody>
+    </table>
+    <p style="margin-top:2rem;"><a class="lien-souligne" href="realisations.html">Voir les quinze ouvrages</a></p>
+  </section>
+
+  <div class="croisement" data-croisement role="img" aria-label="Deux gros plans d'atelier qui se croisent : la terre et le métal"></div>
+
+  <section class="section bande" id="manifeste">
+    <h2>Manifeste</h2>
+    <div class="manifeste" data-manifeste style="margin-top:1.75rem;"></div>
+  </section>
+
+</main>
+
+<footer class="pied bande" data-pied-ateliers>
+  <div><h3>Sabine Orlandini</h3><p>29 montée Bonafous, Lyon 4</p></div>
+  <div><h3>Atelier Malak</h3><p>Vaulx-en-Velin</p></div>
+  <div><h3>hnhu</h3><p>Monts du Lyonnais</p></div>
+  <div><h3>Écrire</h3><p><a class="lien-souligne" data-courriel href="mailto:contact@cafouillage.fr">contact@cafouillage.fr</a></p></div>
+</footer>
+
+<script src="data/contenu.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
