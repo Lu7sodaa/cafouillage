@@ -36,7 +36,7 @@ var CROISEMENT = {
 var MANIFESTE = {
   titre: "Manifeste",
   paragraphes: [
-    "Plusieurs corps, un ballon, et plus personne pour dire à qui appartient le geste. Le but est marqué avant qu'on ait décidé qui l'a mis.",
+    "Plusieurs corps, un ballon. Le but est marqué avant qu'on ait décidé qui l'a mis.",
     "Trois ateliers à Lyon : la terre, le métal, le papier.",
     "Nous ne vendons pas des produits mais des hypothèses d'usage. La fonction n'est ni immédiate ni définitive, et c'est mieux ainsi.",
   ]
