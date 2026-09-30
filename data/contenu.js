@@ -37,8 +37,8 @@ var MANIFESTE = {
   titre: "Manifeste",
   paragraphes: [
     "Plusieurs corps, un ballon, et plus personne pour dire à qui appartient le geste. Le but est marqué avant qu'on ait décidé qui l'a mis.",
-    "Trois ateliers à Lyon : la terre, le métal, la lumière. Aucun des trois ne fabrique un ouvrage entier, et c'est le principe. Ce qui tient, ce sont les liaisons, pas les pièces.",
-    "Nous ne vendons pas des produits mais des hypothèses d'usage. Un plan de travail devient un établi, une assise devient une table, un mur devient une lampe. La fonction n'est ni immédiate ni définitive, et c'est mieux ainsi.",
+    "Trois ateliers à Lyon : la terre, le métal, le papier.",
+    "Nous ne vendons pas des produits mais des hypothèses d'usage. La fonction n'est ni immédiate ni définitive, et c'est mieux ainsi.",
   ]
 };
 
@@ -48,7 +48,7 @@ var ATELIERS = [
     nom: "Sabine Orlandini",
     personne: "Sabine Orlandini",
     matiere: "La terre",
-    lieu: "29 montée Bonafous, Lyon 4",
+    lieu: "Lyon Croix-Rousse",
     depuis: "2008",
     texte: [
       "Architecte de formation et scénographe, Sabine Orlandini crée son atelier céramique en 2008 et se consacre depuis au travail de la terre. Elle conçoit et fabrique ses propres carreaux de faïence émaillée pour des murals, des crédences, des îlots et des banques d'accueil dessinés à partir de l'histoire du lieu.",
@@ -88,10 +88,11 @@ var ATELIERS = [
     cle: "hnhu",
     nom: "hnhu",
     personne: "Lucas Piessat",
-    matiere: "La lumière",
+    matiere: "Le papier",
     lieu: "Chevinay",
     depuis: "",
     texte: [
+      "Garder les livres et utiliser le papier ?",
       "On ne regarde jamais la lumière. On regarde ce qu'elle touche, ce qui la renvoie, ce qui l'arrête. L'espace qu'elle fait naitre. Elle ne devient visible qu'au prix d'un détour. hnhu fabrique ces détours : filtrer, tamiser, pour qu'il reste quelque chose à voir, et parce que l'ombre n'est pas un oubli.",
     ],
     fiche: [
@@ -363,7 +364,7 @@ var PROJETS = [
 var PIECES = [
   /* Collaborations : plusieurs ateliers séparés par un +.
      Elles s'affichent dans un groupe à part, en tête de page. */
-  { ref: "RH01", titre: "Rhizome",                      annee: "",     atelier: "malak+hnhu", matiere: "Acier, papier",                                  tirage: "",              images: ["pieces/rhizome.jpg", "pieces/rhizome-b.jpg"] },
+  { ref: "RH01", titre: "Rhizome",                      annee: "",     atelier: "malak+hnhu", matiere: "Acier, papier",                                  tirage: "",              images: ["pieces/rhizome-02.jpg", "pieces/rhizome-07.jpg", "pieces/rhizome-01.jpg", "pieces/rhizome-03.jpg", "pieces/rhizome-04.jpg", "pieces/rhizome-05.jpg", "pieces/rhizome-06.jpg", "pieces/rhizome-08.jpg"] },
 
   /* Atelier Malak — collection Mangrove. Première image : vue principale ;
      seconde image (facultative) : affichée au survol. */

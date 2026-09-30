@@ -230,10 +230,11 @@
 
       var signature = cles(p).map(nomCourt).join(" × ");
 
-      return '<article class="vignette piece' + (deuxVues ? " piece--deux-vues" : "") + '"' +
-        (deuxVues ? ' tabindex="0"' : "") + '>' +
-        photo +
-        '<h3>' + echappe(p.titre) + '</h3>' +
+      var lien = 'piece.html?ref=' + encodeURIComponent(p.ref);
+
+      return '<article class="vignette piece' + (deuxVues ? " piece--deux-vues" : "") + '">' +
+        '<a href="' + lien + '">' + photo + '</a>' +
+        '<h3><a href="' + lien + '">' + echappe(p.titre) + '</a></h3>' +
         '<span class="donnee">' + echappe(signature) + '</span>' +
         '<span class="donnee">' + [p.annee, p.matiere].filter(Boolean).map(echappe).join(" — ") + '</span>' +
         (p.tirage ? '<span class="donnee">' + echappe(p.tirage) + '</span>' : "") +
@@ -304,6 +305,56 @@
         .map(function (a) { return a.creditPhotos; })
         .join(". ");
     }
+  }
+
+  /* ---------- fiche d'une pièce ---------- */
+
+  function rendPieceSeule() {
+    var hote = document.querySelector("[data-piece]");
+    if (!hote || typeof PIECES === "undefined") return;
+
+    var ref = new URLSearchParams(window.location.search).get("ref");
+    var p = PIECES.filter(function (x) { return x.ref === ref; })[0];
+
+    if (!p) {
+      hote.innerHTML = '<div class="section bande"><h1>Cette pièce n\'est pas au catalogue</h1>' +
+        '<p class="chapo" style="margin-top:1.25rem;">La référence demandée n\'existe pas ou a été renommée.</p>' +
+        '<p style="margin-top:1.5rem;"><a class="lien-souligne" href="pieces.html">Revenir aux pièces</a></p></div>';
+      document.title = "Pièce introuvable — Cafouillage";
+      return;
+    }
+
+    var ateliers = typeof ATELIERS !== "undefined" ? ATELIERS : [];
+    var signature = String(p.atelier || "").split("+").map(function (c) {
+      var a = ateliers.filter(function (x) { return x.cle === c.trim(); })[0];
+      return a ? a.nom : c.trim();
+    }).join(" × ");
+
+    document.title = p.titre + " — Cafouillage";
+
+    var galerie = (p.images && p.images.length ? p.images : [null]).map(function (img) {
+      return cadre(img ? [img] : [], img ? "photo" : "large", p.titre);
+    }).join("");
+
+
+    hote.innerHTML =
+      '<div class="section bande">' +
+        '<p class="donnee tres-discret">' + echappe(p.ref) + '</p>' +
+        '<h1 style="margin-top:0.9rem;">' + echappe(p.titre) + '</h1>' +
+        '<p class="chapo" style="margin-top:1rem;">' + echappe(signature) + '</p>' +
+      '</div>' +
+      '<div class="bande" style="display:grid;gap:1.25rem;padding-bottom:3.5rem;">' + galerie + '</div>' +
+      '<div class="section section--filet bande">' +
+        '<h2>Fiche de la pièce</h2>' +
+        '<table class="fiche mesure-large" style="margin-top:1.5rem;">' +
+          '<tr><th>Référence</th><td class="donnee">' + echappe(p.ref) + '</td></tr>' +
+          '<tr><th>Atelier</th><td>' + echappe(signature) + '</td></tr>' +
+          '<tr><th>Année</th><td>' + texte(p.annee) + '</td></tr>' +
+          '<tr><th>Matières</th><td>' + texte(p.matiere) + '</td></tr>' +
+          '<tr><th>Tirage</th><td>' + texte(p.tirage) + '</td></tr>' +
+        '</table>' +
+        '<p style="margin-top:2rem;"><a class="lien-souligne" href="pieces.html">Revenir aux pièces</a></p>' +
+      '</div>';
   }
 
   /* ---------- ateliers ---------- */
@@ -407,6 +458,7 @@
     sûr("le registre", rendRegistre);
     sûr("la fiche d'ouvrage", rendProjet);
     sûr("les pièces", rendPieces);
+    sûr("la fiche de pièce", rendPieceSeule);
     sûr("les ateliers", rendAteliers);
     /* le pied de page est écrit en dur dans chaque page HTML : le script n'y touche plus */
     sûr("le formulaire", brancheFormulaire);
