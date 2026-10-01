@@ -13,8 +13,8 @@
    un cadre en attente plutôt qu'une image cassée.
 
    Champ "statut"   : "livre", "atelier" ou "dessin".
-   Champ "ateliers" : "cumulus", "malak", "hnhu", ou plusieurs
-                      séparés par un +, par exemple "cumulus+hnhu".
+   Champ "ateliers" : "cumulus", "malak", "khonsou", ou plusieurs
+                      séparés par un +, par exemple "cumulus+khonsou".
    Champ "nature"   : "surface", "mobilier", "objet",
                       "structure" ou "papier".
 --------------------------------------------------------------- */
@@ -85,15 +85,15 @@ var ATELIERS = [
     images: ["malak-web.jpg"]
   },
   {
-    cle: "hnhu",
-    nom: "hnhu",
+    cle: "khonsou",
+    nom: "khonsou",
     personne: "Lucas Piessat",
     matiere: "Le papier",
     lieu: "Chevinay",
     depuis: "",
     texte: [
       "Garder les livres et utiliser le papier ?",
-      "On ne regarde jamais la lumière. On regarde ce qu'elle touche, ce qui la renvoie, ce qui l'arrête. L'espace qu'elle fait naitre. Elle ne devient visible qu'au prix d'un détour. hnhu fabrique ces détours : filtrer, tamiser, pour qu'il reste quelque chose à voir, et parce que l'ombre n'est pas un oubli.",
+      "On ne regarde jamais la lumière. On regarde ce qu'elle touche, ce qui la renvoie, ce qui l'arrête. L'espace qu'elle fait naitre. Elle ne devient visible qu'au prix d'un détour. khonsou fabrique ces détours : filtrer, tamiser, pour qu'il reste quelque chose à voir, et parce que l'ombre n'est pas un oubli.",
     ],
     fiche: [
       ["Matières", "Papier"],
@@ -364,7 +364,7 @@ var PROJETS = [
 var PIECES = [
   /* Collaborations : plusieurs ateliers séparés par un +.
      Elles s'affichent dans un groupe à part, en tête de page. */
-  { ref: "RH01", titre: "Rhizome",                      annee: "",     atelier: "malak+hnhu", matiere: "Acier, papier",                                  tirage: "",              images: ["pieces/rhizome-02.jpg", "pieces/rhizome-07.jpg", "pieces/rhizome-01.jpg", "pieces/rhizome-03.jpg", "pieces/rhizome-04.jpg", "pieces/rhizome-05.jpg", "pieces/rhizome-06.jpg", "pieces/rhizome-08.jpg"] },
+  { ref: "RH01", titre: "Rhizome",                      annee: "",     atelier: "malak+khonsou", matiere: "Acier, papier",                                  tirage: "",              images: ["pieces/rhizome-02.jpg", "pieces/rhizome-07.jpg", "pieces/rhizome-01.jpg", "pieces/rhizome-03.jpg", "pieces/rhizome-04.jpg", "pieces/rhizome-05.jpg", "pieces/rhizome-06.jpg", "pieces/rhizome-08.jpg"] },
 
   /* Atelier Malak — collection Mangrove. Première image : vue principale ;
      seconde image (facultative) : affichée au survol. */

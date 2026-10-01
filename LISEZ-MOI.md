@@ -72,8 +72,8 @@ Sinon : `images: ["respiro-paris-01.jpg", "respiro-paris-02.jpg"]`.
 Champ `statut` : `livre`, `atelier` (en cours) ou `dessin` (projet non
 fabriqué, signalé par une pastille bleue dans le registre).
 
-Champ `ateliers` : `cumulus`, `malak`, `hnhu`, ou plusieurs séparés par un
-`+` pour un ouvrage à plusieurs mains, par exemple `cumulus+hnhu`.
+Champ `ateliers` : `cumulus`, `malak`, `khonsou`, ou plusieurs séparés par un
+`+` pour un ouvrage à plusieurs mains, par exemple `cumulus+khonsou`.
 
 ## Ajouter ou modifier un atelier
 
@@ -88,7 +88,7 @@ pages Ateliers et du pied de page ; les filtres du registre sont, eux, dans
 - Faire valider les fourchettes de prix de `sur-mesure.html` : les chiffres
   actuels sont des hypothèses de travail, pas des tarifs.
 - Vérifier les délais de la même page.
-- Compléter la fiche HNHU : la ligne « Depuis » est vide, et la page
+- Compléter la fiche khonsou : la ligne « Depuis » est vide, et la page
   Ateliers n'affiche pas de date de création pour cet atelier.
 - Ajouter les mentions légales (obligatoire) : éditeur, hébergeur OVH,
   numéro SIRET.
