@@ -332,9 +332,24 @@
 
     document.title = p.titre + " — Cafouillage";
 
-    var galerie = (p.images && p.images.length ? p.images : [null]).map(function (img) {
-      return cadre(img ? [img] : [], img ? "photo" : "large", p.titre);
-    }).join("");
+    var vues = p.images && p.images.length ? p.images : [];
+
+    /* une seule photo : affichage simple. Plusieurs : carrousel. */
+    var galerie = vues.length < 2
+      ? cadre(vues, vues.length ? "photo" : "large", p.titre)
+      : '<div class="carrousel" data-carrousel>' +
+          '<div class="carrousel-scene">' +
+            vues.map(function (img, i) {
+              return '<img src="' + echappe(chemin(img)) + '" alt="' + echappe(p.titre) +
+                ', vue ' + (i + 1) + '"' + (i ? ' hidden loading="lazy"' : '') + '>';
+            }).join("") +
+          '</div>' +
+          '<div class="carrousel-barre">' +
+            '<button type="button" class="carrousel-precedent" aria-label="Vue précédente">←</button>' +
+            '<span class="donnee carrousel-compteur" aria-live="polite">1 / ' + vues.length + '</span>' +
+            '<button type="button" class="carrousel-suivant" aria-label="Vue suivante">→</button>' +
+          '</div>' +
+        '</div>';
 
 
     hote.innerHTML =
@@ -343,7 +358,7 @@
         '<h1 style="margin-top:0.9rem;">' + echappe(p.titre) + '</h1>' +
         '<p class="chapo" style="margin-top:1rem;">' + echappe(signature) + '</p>' +
       '</div>' +
-      '<div class="bande" style="display:grid;gap:1.25rem;padding-bottom:3.5rem;">' + galerie + '</div>' +
+      '<div class="bande" style="padding-bottom:3.5rem;">' + galerie + '</div>' +
       '<div class="section section--filet bande">' +
         '<h2>Fiche de la pièce</h2>' +
         '<table class="fiche mesure-large" style="margin-top:1.5rem;">' +
@@ -355,6 +370,52 @@
         '</table>' +
         '<p style="margin-top:2rem;"><a class="lien-souligne" href="pieces.html">Revenir aux pièces</a></p>' +
       '</div>';
+  }
+
+  /* ---------- carrousel ---------- */
+
+  function brancheCarrousel() {
+    document.querySelectorAll("[data-carrousel]").forEach(function (c) {
+      var vues = Array.prototype.slice.call(c.querySelectorAll(".carrousel-scene img"));
+      if (vues.length < 2) return;
+
+      var compteur = c.querySelector(".carrousel-compteur");
+      var position = 0;
+
+      function montre(i) {
+        position = (i + vues.length) % vues.length;
+        vues.forEach(function (v, n) {
+          if (n === position) { v.removeAttribute("hidden"); v.loading = "eager"; }
+          else { v.setAttribute("hidden", ""); }
+        });
+        compteur.textContent = (position + 1) + " / " + vues.length;
+        /* on précharge la suivante pour éviter le clignotement */
+        var suivante = vues[(position + 1) % vues.length];
+        if (suivante) suivante.loading = "eager";
+      }
+
+      c.querySelector(".carrousel-precedent").addEventListener("click", function () { montre(position - 1); });
+      c.querySelector(".carrousel-suivant").addEventListener("click", function () { montre(position + 1); });
+
+      /* flèches du clavier quand le carrousel a le focus */
+      c.setAttribute("tabindex", "0");
+      c.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") { montre(position - 1); e.preventDefault(); }
+        if (e.key === "ArrowRight") { montre(position + 1); e.preventDefault(); }
+      });
+
+      /* glissement du doigt sur mobile */
+      var depart = null;
+      c.addEventListener("touchstart", function (e) { depart = e.changedTouches[0].clientX; }, { passive: true });
+      c.addEventListener("touchend", function (e) {
+        if (depart === null) return;
+        var ecart = e.changedTouches[0].clientX - depart;
+        if (Math.abs(ecart) > 40) montre(position + (ecart < 0 ? 1 : -1));
+        depart = null;
+      }, { passive: true });
+
+      montre(0);
+    });
   }
 
   /* ---------- ateliers ---------- */
@@ -430,6 +491,49 @@
 
   /* ---------- navigation courante ---------- */
 
+  /* Menu burger : le bouton n'est créé qu'en JavaScript, et la feuille de
+     style ne masque la navigation que si ce bouton existe. Sans JavaScript,
+     les liens restent donc visibles. */
+  function brancheBurger() {
+    var tete = document.querySelector(".tete");
+    var menu = tete && tete.querySelector(".menu");
+    if (!tete || !menu || tete.querySelector(".burger")) return;
+
+    menu.id = menu.id || "menu-principal";
+
+    var bouton = document.createElement("button");
+    bouton.className = "burger";
+    bouton.type = "button";
+    bouton.setAttribute("aria-expanded", "false");
+    bouton.setAttribute("aria-controls", menu.id);
+    bouton.setAttribute("aria-label", "Ouvrir le menu");
+    bouton.innerHTML = '<span></span><span></span><span></span>';
+
+    tete.classList.add("tete--burger");
+    tete.insertBefore(bouton, menu);
+
+    function bascule(ouvert) {
+      tete.classList.toggle("ouvert", ouvert);
+      bouton.setAttribute("aria-expanded", String(ouvert));
+      bouton.setAttribute("aria-label", ouvert ? "Fermer le menu" : "Ouvrir le menu");
+    }
+
+    bouton.addEventListener("click", function () {
+      bascule(bouton.getAttribute("aria-expanded") !== "true");
+    });
+
+    /* refermer après un clic sur un lien, ou avec la touche Échap */
+    menu.addEventListener("click", function (e) {
+      if (e.target.closest("a")) bascule(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && tete.classList.contains("ouvert")) {
+        bascule(false);
+        bouton.focus();
+      }
+    });
+  }
+
   function marqueNav() {
     var page = window.location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll(".menu a").forEach(function (a) {
@@ -453,12 +557,14 @@
   document.addEventListener("DOMContentLoaded", function () {
     sûr("l'enseigne", rendEnseigne);
     sûr("la navigation", marqueNav);
+    sûr("le menu burger", brancheBurger);
     sûr("l'image croisée", rendCroisement);
     sûr("le manifeste", rendManifeste);
     sûr("le registre", rendRegistre);
     sûr("la fiche d'ouvrage", rendProjet);
     sûr("les pièces", rendPieces);
     sûr("la fiche de pièce", rendPieceSeule);
+    sûr("le carrousel", brancheCarrousel);
     sûr("les ateliers", rendAteliers);
     /* le pied de page est écrit en dur dans chaque page HTML : le script n'y touche plus */
     sûr("le formulaire", brancheFormulaire);

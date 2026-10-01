@@ -161,6 +161,92 @@ p:last-child { margin-bottom: 0; }
   vertical-align: 1px;
 }
 
+/* ---------- menu burger ---------- */
+
+.burger { display: none; }
+
+@media (max-width: 800px) {
+  .burger {
+    display: grid;
+    gap: 5px;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0.55rem 0.4rem;
+    align-content: center;
+    background: none;
+    border: 1px solid var(--trait);
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .burger span { display: block; height: 1px; background: var(--encre); }
+  .burger[aria-expanded="true"] { border-color: var(--encre); }
+
+  /* le bouton reste sur la même ligne que l'enseigne */
+  .tete--burger { align-items: center; }
+  .tete--burger .bloc-enseigne { flex: 1 1 0; min-width: 0; }
+  .burger { flex: 0 0 auto; }
+
+  /* la navigation n'est masquée que si le bouton existe */
+  .tete--burger .menu { display: none; }
+  .tete--burger.ouvert .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    order: 3;
+    margin-top: 1rem;
+    border-top: 1px solid var(--trait);
+  }
+  .tete--burger.ouvert .menu a {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--trait);
+    font-size: 1rem;
+  }
+  .tete--burger.ouvert .menu a[aria-current="page"] { border-bottom-color: var(--trait); color: var(--encre); }
+}
+
+/* ---------- carrousel ---------- */
+
+.carrousel { position: relative; }
+.carrousel:focus-visible { outline: 2px solid var(--outremer); outline-offset: 6px; }
+
+.carrousel-scene {
+  background: var(--platre-creux);
+  height: min(70vh, 38rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carrousel-scene img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+/* sans cette règle, « img { display: block } » plus haut annule l'attribut hidden */
+.carrousel-scene img[hidden] { display: none; }
+
+.carrousel-barre {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.9rem;
+}
+
+.carrousel-barre button {
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  background: none;
+  border: 1px solid var(--trait);
+  border-radius: 2px;
+  color: var(--encre-douce);
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+}
+.carrousel-barre button:hover { border-color: var(--encre); color: var(--encre); }
+
+.carrousel-compteur { color: var(--encre-legere); }
+
+@media (max-width: 800px) {
+  .carrousel-scene { height: 62vh; }
+}
+
 /* ---------- filtres ---------- */
 
 .filtres { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
