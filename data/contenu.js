@@ -36,9 +36,10 @@ var CROISEMENT = {
 var MANIFESTE = {
   titre: "Manifeste",
   paragraphes: [
-    "Plusieurs corps, un ballon. Le but est marqué avant qu'on ait décidé qui l'a mis.",
-    "Trois ateliers à Lyon : la terre, le métal, le papier.",
-    "Nous ne vendons pas des produits mais des hypothèses d'usage. La fonction n'est ni immédiate ni définitive, et c'est mieux ainsi.",
+    "Plusieurs corps, un matériau. La forme naît avant qu'on ait décidé qui l'a désirée.",
+    "Trois ateliers à Lyon : la terre, le métal, le papier. Trois amis, quelques idéaux en commun : le travail libéré des rapports de production, l'artisanat d'art comme recherche d'un luxe communal, le refus de la fonctionnalité immédiate et définitive guidé par la joie de pénétrer des lieux habités, et la certitude que « pour certaines choses, les faire bien, c'est ipso facto les faire belles. Voilà le commencement du luxe. »",
+    "Nos anciens ont tissé le linceul du vieux monde, il est temps de coudre les langes de celui qui accouche.",
+    "Nous ne vendons pas des produits mais des hypothèses d'usage. C'est mieux ainsi.",
   ]
 };
 
