@@ -29,8 +29,12 @@ var ENSEIGNE = {
    Déposer les fichiers dans /images, renseigner "fichier".
    Laisser vide pour afficher un cadre en attente. */
 var CROISEMENT = {
-  gauche:  { fichier: "croisement-terre.jpg", legende: "Carreaux de faïence, Sabine Orlandini" },
-  droite:  { fichier: "croisement-metal.jpg", legende: "Aluminium de fonderie, Atelier Malak" }
+  /* Les deux photos sont pivotées d'un quart de tour pour que leurs lignes
+     fortes deviennent horizontales, et recadrées au carré : elles se raccordent
+     alors hauteur pour hauteur de part et d'autre du joint central.
+     Si vous changez une photo, gardez-la carrée, lignes à l'horizontale. */
+  gauche: { fichier: "croisement-metal-pivote.jpg",  legende: "Aluminium de fonderie, Atelier Malak" },
+  droite: { fichier: "croisement-terre-pivotee.jpg", legende: "Carreaux de faïence, Sabine Orlandini" }
 };
 
 var MANIFESTE = {

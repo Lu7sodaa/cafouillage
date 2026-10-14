@@ -85,6 +85,9 @@ p:last-child { margin-bottom: 0; }
 /* ---------- en-tête ---------- */
 
 .tete {
+  position: sticky;
+  top: 0;
+  z-index: 60;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -92,7 +95,28 @@ p:last-child { margin-bottom: 0; }
   flex-wrap: wrap;
   padding-top: 1.4rem;
   padding-bottom: 1.4rem;
+  background: var(--platre);
   border-bottom: 1px solid var(--trait-fort);
+  transition: padding 0.22s ease;
+}
+
+/* passé le premier écran, l'entête se replie : la base-line a été lue,
+   elle cède la place au contenu */
+.tete--compacte { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.tete--compacte .base-line {
+  opacity: 0;
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+}
+.base-line { transition: opacity 0.22s ease, max-height 0.22s ease; max-height: 3rem; }
+
+/* les ancres ne doivent pas se glisser sous l'entête */
+html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+[id] { scroll-margin-top: 6.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 
 .bloc-enseigne { display: grid; gap: 0.3rem; }
@@ -310,18 +334,19 @@ p:last-child { margin-bottom: 0; }
   border-bottom: 1px solid var(--trait-fort);
 }
 
-.croisement-pan { position: absolute; inset: 0; }
+/* deux panneaux buttés, sans artifice de couture : ce qui relie les deux
+   matières, ce sont leurs lignes fortes, qui se retrouvent à la même
+   hauteur de part et d'autre du joint. Chaque image est calée sur le bord
+   qui touche ce joint, pour que le raccord tienne à toute largeur. */
+.croisement-pan { position: absolute; top: 0; bottom: 0; width: 50%; overflow: hidden; }
 .croisement-pan img { width: 100%; height: 100%; object-fit: cover; }
 
-.croisement-pan--gauche { background: #2C3035; }
+.croisement-pan--gauche { left: 0; background: #2C3035; }
+.croisement-pan--gauche img { object-position: 100% 50%; }
 
-.croisement-pan--droite {
-  background: #6E645A;
-  clip-path: polygon(58% 0, 100% 0, 100% 100%, 28% 100%);
-}
+.croisement-pan--droite { right: 0; background: #6E645A; }
+.croisement-pan--droite img { object-position: 0% 50%; }
 
-/* voile sombre en bas de bande : garde les légendes lisibles
-   quelle que soit la photo posée derrière */
 .croisement-voile {
   position: absolute;
   left: 0;
@@ -332,23 +357,6 @@ p:last-child { margin-bottom: 0; }
   background: linear-gradient(to top, rgba(10, 11, 10, 0.6), rgba(10, 11, 10, 0));
 }
 
-/* la couture est doublée : un filet clair et son ombre, pour rester
-   visible aussi bien sur une matière pâle que sur une matière sombre */
-.croisement-couture {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: var(--platre);
-  opacity: 0.92;
-  clip-path: polygon(58% 0, 58.14% 0, 28.14% 100%, 28% 100%);
-}
-
-.croisement-couture--ombre {
-  background: var(--encre);
-  opacity: 0.45;
-  clip-path: polygon(58.14% 0, 58.42% 0, 28.42% 100%, 28.14% 100%);
-}
-
 .croisement-legende {
   position: absolute;
   bottom: 1.1rem;
@@ -357,7 +365,6 @@ p:last-child { margin-bottom: 0; }
 }
 .croisement-legende--gauche { left: var(--marge); }
 .croisement-legende--droite { right: var(--marge); }
-
 /* ---------- manifeste ---------- */
 
 .manifeste { max-width: 54ch; }
@@ -490,9 +497,6 @@ p:last-child { margin-bottom: 0; }
   .etapes li { grid-template-columns: 2.5rem 1fr; }
   .fiche th { width: 8rem; }
   .croisement { height: 62vh; }
-  .croisement-pan--droite { clip-path: polygon(0 62%, 100% 34%, 100% 100%, 0 100%); }
-  .croisement-couture { clip-path: polygon(0 62%, 100% 34%, 100% 34.4%, 0 62.4%); }
-  .croisement-couture--ombre { clip-path: polygon(0 62.4%, 100% 34.4%, 100% 35.2%, 0 63.2%); }
   .croisement-legende--gauche { bottom: auto; top: 1.1rem; }
   /* en mobile la première légende remonte en haut : le voile couvre
      les deux extrémités de la bande */

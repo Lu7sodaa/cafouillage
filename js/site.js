@@ -64,27 +64,38 @@
 
   /* ---------- croisement pleine page ---------- */
 
+  /* Les deux photos sont pivotées d'un quart de tour : la coulée d'aluminium
+     et les rangs de carreaux deviennent horizontaux. Recadrées au carré, elles
+     portent leurs lignes fortes aux mêmes hauteurs — 14 %, 42 %, 56 %, 76 % —
+     si bien qu'en les buttant l'une contre l'autre, la veine du métal arrive
+     exactement sur le joint de la faïence. Pas de fondu : un raccord.
+     Chaque panneau est calé sur le bord qui touche la couture
+     (le métal par la droite, la terre par la gauche), pour que l'alignement
+     tienne à n'importe quelle largeur d'écran. */
+
   function rendCroisement() {
     var hote = document.querySelector("[data-croisement]");
     if (!hote || typeof CROISEMENT === "undefined") return;
 
     function pan(cote, donnees) {
       var img = donnees && donnees.fichier
-        ? '<img src="' + echappe(chemin(donnees.fichier)) + '" alt="' + echappe(donnees.legende || "") + '">'
+        ? '<img src="' + echappe(chemin(donnees.fichier)) + '" alt="">'
         : "";
       return '<div class="croisement-pan croisement-pan--' + cote + '">' + img + '</div>';
+    }
+
+    function legende(cote, donnees) {
+      var t = echappe((donnees && donnees.legende) || "");
+      return t ? '<span class="croisement-legende croisement-legende--' + cote +
+                 ' donnee">' + t + '</span>' : "";
     }
 
     hote.innerHTML =
       pan("gauche", CROISEMENT.gauche) +
       pan("droite", CROISEMENT.droite) +
       '<div class="croisement-voile"></div>' +
-      '<div class="croisement-couture croisement-couture--ombre"></div>' +
-      '<div class="croisement-couture"></div>' +
-      '<span class="croisement-legende croisement-legende--gauche donnee">' +
-        echappe((CROISEMENT.gauche && CROISEMENT.gauche.legende) || "") + '</span>' +
-      '<span class="croisement-legende croisement-legende--droite donnee">' +
-        echappe((CROISEMENT.droite && CROISEMENT.droite.legende) || "") + '</span>';
+      legende("gauche", CROISEMENT.gauche) +
+      legende("droite", CROISEMENT.droite);
   }
 
   /* ---------- manifeste ---------- */
@@ -494,6 +505,35 @@
   /* Menu burger : le bouton n'est créé qu'en JavaScript, et la feuille de
      style ne masque la navigation que si ce bouton existe. Sans JavaScript,
      les liens restent donc visibles. */
+  /* ---------- entête collée en haut ---------- */
+
+  /* L'entête reste visible au défilement. Passé le premier écran elle se
+     replie : la base-line disparaît, les marges se resserrent, et le menu
+     ne mange plus que trois centimètres de page. */
+  function brancheEntete() {
+    var tete = document.querySelector(".tete");
+    if (!tete) return;
+
+    var seuil = 90;
+    var enCours = false;
+
+    function mesure() {
+      enCours = false;
+      var compacte = (window.scrollY || window.pageYOffset || 0) > seuil;
+      /* menu mobile ouvert : on garde l'entête déployée */
+      if (tete.classList.contains("ouvert")) compacte = false;
+      tete.classList.toggle("tete--compacte", compacte);
+    }
+
+    window.addEventListener("scroll", function () {
+      if (enCours) return;
+      enCours = true;
+      window.requestAnimationFrame(mesure);
+    }, { passive: true });
+
+    mesure();
+  }
+
   function brancheBurger() {
     var tete = document.querySelector(".tete");
     var menu = tete && tete.querySelector(".menu");
@@ -558,6 +598,7 @@
     sûr("l'enseigne", rendEnseigne);
     sûr("la navigation", marqueNav);
     sûr("le menu burger", brancheBurger);
+    sûr("l'entête collée", brancheEntete);
     sûr("l'image croisée", rendCroisement);
     sûr("le manifeste", rendManifeste);
     sûr("le registre", rendRegistre);
