@@ -2,12 +2,16 @@
 .DS_Store
 
 # Originaux photo : ils restent sur le Mac, le site ne s'en sert pas.
-# Tout le dossier images est ignoré, sauf ce que le site charge vraiment.
+# Tout le dossier images est ignoré, SAUF ce qui est listé ci-dessous.
+#
+# Conséquence à retenir : une photo déposée à la racine de images/ et
+# appelée depuis contenu.js ne partira PAS en ligne tant que son nom
+# n'est pas ajouté ici. Les dossiers images/pieces/ et images/projets/,
+# eux, passent entièrement : c'est l'endroit où déposer les nouvelles photos.
 images/*
 !images/pieces/
 !images/projets/
-!images/croisement-terre.jpg
-!images/croisement-metal.jpg
+!images/croisement-*.jpg
 !images/sabine-web.jpg
 !images/malak-web.jpg
 !images/lucas.jpg
